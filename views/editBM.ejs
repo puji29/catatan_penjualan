@@ -1,0 +1,60 @@
+<%- include('layout/header') %>
+
+<div class="card card-primary card-outline mb-4">
+    <!--begin::Header-->
+    <div class="card-header"><div class="card-title">Edit Barang Masuk</div></div>
+    <!--end::Header-->
+    <!--begin::Form-->
+    <form action="/edit/<%= barang.id %>" method="POST">
+      <!--begin::Body-->
+      <div class="card-body">
+        <div class="">
+          <label  class="form-label">Nama barang</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama_barang"
+            name="nama_barang" 
+            value="<%= barang.nama_barang %>"
+            required
+          />
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <label  class="form-label">Harga</label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            name="price" 
+            value="<%= barang.price %>"
+            required
+          />
+        </div>
+       
+      </div>
+      <div class="card-body">
+        <div class="">
+          <label  class="form-label">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            name="stock"
+            value="<%= barang.stock %>"
+            required
+          />
+        </div>
+       
+      </div>
+      <!--end::Body-->
+      <!--begin::Footer-->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">KIRIM</button>
+      </div>
+      <!--end::Footer-->
+    </form>
+    <!--end::Form-->
+  </div>
+<%- include('layout/footer') %>

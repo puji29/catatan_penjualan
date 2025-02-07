@@ -1,0 +1,57 @@
+<%- include('layout/header') %>
+<div class="card">
+    <div class="card-header"><h3 class="card-title py-2 mx-2">Data Barang Keluar</h3><a href="/add" type="button" class="btn btn-primary" >Tambahkan</a></div>
+    <div></div>
+    <!-- /.card-header -->
+    <div class="card-body">
+      <% if (barangs.length > 0) { %>
+      <table class="table table-bordered" id="myTable" class="display">
+        <thead>
+          <tr>
+            <th style="width: 10px">No</th>
+            <th>Id</th>
+            <th>Nama Barang</th>
+            <th >Harga</th>
+            <th >Stock</th>
+            <th >Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% barangs.forEach(function(barang, index) { %>
+          <tr class="align-middle">
+            <td><%= index + 1 %></td>
+            <td><%= barang.id %></td>
+            <td><%= barang.nama_barang %></td>
+            <td><%= barang.price %></td>
+            <td><%= barang.stock %></td>
+            
+            <td><a href="/edit/<%= barang.id %>" class="btn btn-warning">Edit</a>
+              <a href="/deleteBK/<%= barang.id %>" class="btn btn-danger" onclick="alert('Apakah Anda yakin ingin menghapus barang ini?')">Hapus
+              </a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } else { %>
+        <p>Tidak ada data</p>
+        <% } %>
+        
+    </div>
+    <script>
+      $(document).ready(function() {
+          $('#myTable').DataTable();
+      });
+  </script>
+    <!-- /.card-body -->
+    <!-- <div class="card-footer clearfix">
+      <ul class="pagination pagination-sm m-0 float-end">
+        <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
+      </ul>
+    </div> -->
+  </div>
+ 
+  <%- include('layout/footer') %>

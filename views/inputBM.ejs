@@ -1,0 +1,54 @@
+<%- include('layout/header') %>
+
+<div class="card card-primary card-outline mb-4">
+    <!--begin::Header-->
+    <div class="card-header"><div class="card-title">Tambah Barang</div></div>
+    <!--end::Header-->
+    <!--begin::Form-->
+    <form action="/add" method="POST">
+      <!--begin::Body-->
+      <div class="card-body">
+        <div class="">
+          <label  class="form-label">Nama barang</label>
+          <input
+            type="text"
+            class="form-control"
+            id="nama_barang"
+            name="nama_barang" 
+          />
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="">
+          <label  class="form-label">Harga</label>
+          <input
+            type="number"
+            class="form-control"
+            id="price"
+            name="price" 
+          />
+        </div>
+       
+      </div>
+      <div class="card-body">
+        <div class="">
+          <label  class="form-label">Stock</label>
+          <input
+            type="number"
+            class="form-control"
+            id="stock"
+            name="stock"
+          />
+        </div>
+       
+      </div>
+      <!--end::Body-->
+      <!--begin::Footer-->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+      <!--end::Footer-->
+    </form>
+    <!--end::Form-->
+  </div>
+<%- include('layout/footer') %>
