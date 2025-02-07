@@ -97,8 +97,44 @@ app.get("/barang_keluar", (req, res) => {
 });
 
 app.get('/addBK', (req, res) => {
-  res.render('inputBK', { title: 'Tambah Barang' });
+  res.render('inputBK', { title: 'Tambah Barang', barang: {} });
 });
+
+app.post("/addBK", (req, res) => {
+  const { nama_barang, stock } = req.body;
+
+  // Search
+  const sql = "SELECT * FROM barang_masuk WHERE nama_barang = ?";
+  db.all(sql, [nama_barang], (err, rows) => {
+    if (err) {
+      return console.error(err.message);
+    }
+
+    if (rows.length > 0) {
+      // Jika barang ditemukan, lakukan pengurangan stok
+      const sql2 = `UPDATE barang_masuk SET stock = stock - ? WHERE nama_barang = ?`;
+      db.run(sql2, [stock, nama_barang], (err) => {
+        if (err) {
+          return console.error(err.message);
+        }
+        console.log(`Stock untuk ${nama_barang} telah dikurangi sebanyak ${stock} unit.`);
+        
+        // Setelah pengurangan stok, kirim ulang query untuk mendapatkan data terbaru
+        db.all(sql, [nama_barang], (err, updatedRows) => {
+          if (err) {
+            return console.error(err.message);
+          }
+          res.render('inputBK', { barang: updatedRows[0] });
+        });
+      });
+    } else {
+      // Jika barang tidak ditemukan, kirimkan barang kosong ke template
+      res.render('inputBK', { barang: {} });
+    }
+  });
+});
+
+
 
 app.get("/deleteBK/:id", (req, res) => {
   const id = req.params.id;
